@@ -1,0 +1,55 @@
+<PongBall>:
+    size: 50, 50
+    canvas:
+        Ellipse:
+            pos: self.pos
+            size: self.size
+
+
+<PongPaddle>:
+    size: 25, 200
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<PongGame>:
+    # Reference variables so the python file can modify the widgets
+    ball: pong_ball
+    l_player: player_left
+    r_player: player_right
+
+    canvas:
+        # line in the middle of the screen
+        Rectangle:
+            pos: self.center_x - 5, 0
+            size: 10, self.height
+
+    # left player's score
+    Label:
+        font_size: 50
+        center_x: root.width / 4
+        top: root.top - 50
+        text: str(root.l_player.score)
+
+    # right player's score
+    Label:
+        font_size: 50
+        center_x: root.width * 3/4
+        top: root.top - 50
+        text: str(root.r_player.score)
+
+    PongBall:
+        id: pong_ball
+        center: self.parent.center
+
+    PongPaddle:
+        id: player_left
+        x: root.x + self.width
+        center_y: root.center_y
+
+    PongPaddle:
+        id: player_right
+        x: root.width - (self.width * 2)
+        center_y: root.center_y
